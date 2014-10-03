@@ -7,10 +7,19 @@ using System.Windows.Forms;
 
 namespace Dumpcap
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class GUI : Form
     {
+        /// <summary>
+        /// The proc to run the task
+        /// </summary>
         private Process proc;
-        
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GUI"/> class.
+        /// </summary>
         public GUI()
         {
             InitializeComponent();
@@ -24,6 +33,9 @@ namespace Dumpcap
          * 
         **/
 
+        /// <summary>
+        /// Starts the dumpcap process
+        /// </summary>
         public void DumpCap()
         {
             proc = new Process();
@@ -35,6 +47,9 @@ namespace Dumpcap
             proc.Start();
         }
 
+        /// <summary>
+        /// Scheduleds the task.
+        /// </summary>
         public void ScheduledTask()
         {
             StreamWriter scheduledtask = new StreamWriter(Environment.GetEnvironmentVariable("USERPROFILE") + "\\Desktop\\" + tbCapName.Text + ".bat");
@@ -42,16 +57,31 @@ namespace Dumpcap
             scheduledtask.Close();
         }
 
+        /// <summary>
+        /// Handles the CheckedChanged event of the rbNow control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void rbNow_CheckedChanged(object sender, EventArgs e)
         {
             btnSubmit.Text = "Capture Logs";
         }
 
+        /// <summary>
+        /// Handles the CheckedChanged event of the rbLongTerm control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void rbLongTerm_CheckedChanged(object sender, EventArgs e)
         {
             btnSubmit.Text = "Create Batch File";
         }
 
+        /// <summary>
+        /// Handles the Click event of the btnSubmit control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             
@@ -102,6 +132,11 @@ namespace Dumpcap
             
         }
 
+        /// <summary>
+        /// Handles the Load event of the GUI control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void GUI_Load(object sender, EventArgs e)
         {
             foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
@@ -110,6 +145,11 @@ namespace Dumpcap
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the tbCapLocation control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbCapLocation_Click(object sender, EventArgs e)
         {
             fbdCapLocation.RootFolder = Environment.SpecialFolder.MyComputer;
