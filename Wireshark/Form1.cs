@@ -10,7 +10,7 @@ namespace Wireshark
     public partial class GUI : Form
     {
         private Process proc;
-        private string procOutput = string.Empty;
+        
         public GUI()
         {
             InitializeComponent();
@@ -53,14 +53,51 @@ namespace Wireshark
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             
-            if (rbNow.Checked.Equals(true))
+            if (cbInterfaces.SelectedItem == null)
             {
-                DumpCap();
+                MessageBox.Show("Please select a network interface for the drop down list", "Required Item", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            if (rbLongTerm.Checked.Equals(true))
+            else
             {
-                ScheduledTask();
+                if (!String.IsNullOrEmpty(tbMaxFileSize.Text))
+                {
+                    if (!String.IsNullOrEmpty(tbMaxFiles.Text))
+                    {
+                        if (!String.IsNullOrEmpty(tbCapName.Text))
+                        {
+                            if (!String.IsNullOrEmpty(tbCapLocation.Text))
+                            {
+                                if (rbLongTerm.Checked.Equals(true))
+                                {
+                                    ScheduledTask();
+                                }
+
+                                if (rbNow.Checked.Equals(true))
+                                {
+                                    DumpCap();
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Please select a path to save your captures", "Required Item", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please supply a name for your capture files", "Required Item", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please enter the number of rollover files", "Required Item", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please enter the max file size", "Required Item", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
+            
         }
 
         private void GUI_Load(object sender, EventArgs e)
@@ -77,7 +114,7 @@ namespace Wireshark
             DialogResult result = fbdCapLocation.ShowDialog();
             if (result == DialogResult.OK)
             {
-                tbCapLocation.Text = fbdCapLocation.SelectedPath + @"\";
+                tbCapLocation.Text = fbdCapLocation.SelectedPath;
             }
         }  
     }
