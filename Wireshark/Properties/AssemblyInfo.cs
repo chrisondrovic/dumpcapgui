@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Wireshark")]
+[assembly: AssemblyTitle("Dumpcap GUI")]
 [assembly: AssemblyDescription("Dumpcap GUI")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Interactive Intelligence")]
-[assembly: AssemblyProduct("Wireshark")]
+[assembly: AssemblyProduct("Dumpcap GUI")]
 [assembly: AssemblyCopyright("Copyright © Chris Ondrovic  2014")]
 [assembly: AssemblyTrademark("Deliberately Innovative")]
 [assembly: AssemblyCulture("")]

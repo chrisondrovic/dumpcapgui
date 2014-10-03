@@ -5,7 +5,7 @@ using System.IO;
 using System.Net.NetworkInformation;
 using System.Windows.Forms;
 
-namespace Wireshark
+namespace Dumpcap
 {
     public partial class GUI : Form
     {
