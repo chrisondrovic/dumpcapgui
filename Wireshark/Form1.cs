@@ -29,7 +29,7 @@ namespace Wireshark
             proc = new Process();
             proc.StartInfo.FileName = ConfigurationManager.AppSettings["dumpcapLocation"];
             //-w E:\captures\<CHANGENUMBER>-<SERVERNAME>.pcap -i <INTERFACENUMBER> -b filesize:51200 -b files:100
-            proc.StartInfo.Arguments = "-w " + tbCapLocation.Text + @"\" + ConfigurationManager.AppSettings["capturefileName"]  + ".pcap -i " + cbInterfaces.SelectedIndex + " -b filesize:" + tbMaxFileSize.Text + " -b files:100";
+            proc.StartInfo.Arguments = "-w " + tbCapLocation.Text + @"\" + tbCapName.Text + ".pcap -i " + cbInterfaces.SelectedIndex + " -b filesize:" + tbMaxFileSize.Text + " -b files:" + tbMaxFiles.Text;
             proc.StartInfo.UseShellExecute = false;
             proc.StartInfo.RedirectStandardInput = true;
             proc.Start();
@@ -37,7 +37,9 @@ namespace Wireshark
 
         public void ScheduledTask()
         {
-
+            StreamWriter scheduledtask = new StreamWriter(Environment.GetEnvironmentVariable("USERPROFILE") + "\\Desktop\\" + tbCapName.Text + ".bat");
+            scheduledtask.WriteLine('"' + ConfigurationManager.AppSettings["dumpcapLocation"] + '"' + " -w " + tbCapLocation.Text + @"\" + tbCapName.Text + ".pcap -i " + cbInterfaces.SelectedIndex + " -b filesize:" + tbMaxFileSize.Text + " -b files:" + tbMaxFiles.Text);
+            scheduledtask.Close();
         }
 
         private void rbNow_CheckedChanged(object sender, EventArgs e)
